@@ -4,7 +4,7 @@ Simple Linux Kernel Module (LKM) template.
 
 ## Usage
 
-You need [cookiecutter][https://github.com/audreyr/cookiecutter], a tool to create projects from project templates. Once installed (in a virtualenv or just with `pip install cookiecutter`), you can use the following command:
+You need [cookiecutter](https://github.com/audreyr/cookiecutter), a tool to create projects from project templates. Once installed (in a virtualenv or just with `pip install cookiecutter`), you can use the following command:
 
 ```bash
 cookiecutter -c latest https://github.com/nderjung/bootstrap.ko.git
