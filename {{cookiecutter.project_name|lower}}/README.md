@@ -21,4 +21,4 @@ insmod ./src/{{cookiecutter.project_name|lower}}.ko
 
 Most of the documentation is available in the manual page `{{cookiecutter.project_name|lower}}(8)`.
 
-# TODO: Update the README.md file with a complete description and some usage instructions.
+    TODO: Update the README.md file with a complete description and some usage instructions.
