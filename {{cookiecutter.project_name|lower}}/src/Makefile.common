@@ -1,0 +1,21 @@
+{{cookiecutter.project_name|lower|replace("-","_")}}dir = @moduledir@
+KERNEL_LOCATION = @kerneldir@
+KBUILD_VERBOSE = 1
+MOD_DEVDIR = $(PWD)
+ARCH = x86_64
+CROSS_COMPILE	=
+
+{{cookiecutter.project_name|lower|replace("-","_")}}_CFLAGS = -g -I/usr/realtime/include -I/usr/include/ -ffast-math -mhard-float
+
+export {{cookiecutter.project_name|lower|replace("-","_")}}_CFLAGS {{cookiecutter.project_name|lower|replace("-","_")}}_DATA
+
+$({{cookiecutter.project_name|lower|replace("-","_")}}_DATA): $(automake_dummy_SOURCES)
+	mv Makefile Makefile.automake
+	cp Makefile.kernel Makefile
+	$(MAKE) -C $(KERNEL_LOCATION) SUBDIRS=$(PWD) modules \
+		KBUILD_VERBOSE=$(KBUILD_VERBOSE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
+	mv Makefile.automake Makefile
+
+CLEANFILES = $({{cookiecutter.project_name|lower|replace("-","_")}}_DATA) .$({{cookiecutter.project_name|lower|replace("-","_")}}_DATA).{cmd,flags} .$({{cookiecutter.project_name|lower|replace("-","_")}}_DATA:.o=.@kernelext@).cmd \
+	$({{cookiecutter.project_name|lower|replace("-","_")}}_DATA:.o=.mod.c) .$({{cookiecutter.project_name|lower|replace("-","_")}}_DATA:.o=.mod.o.cmd) $({{cookiecutter.project_name|lower|replace("-","_")}}_DATA:.o=.@kernelext@) \
+	Modules.symvers *~

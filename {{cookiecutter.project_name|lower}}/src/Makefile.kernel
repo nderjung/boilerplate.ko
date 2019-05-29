@@ -1,0 +1,17 @@
+EXTRA_CFLAGS += $({{cookiecutter.project_name|lower|replace("-","_")}}_EXTRA_CFLAGS)
+
+obj-m = $({{cookiecutter.project_name|lower|replace("-","_")}}_DATA)
+MI_OBJS = $({{cookiecutter.project_name|lower|replace("-","_")}}_DATA)
+
+all clean:
+	$(warning **************************************************)
+	$(warning *** Makefile trick not undone, trying to recover *)
+	$(warning **************************************************)
+	mv Makefile.automake Makefile
+	$(MAKE) $@
+
+# The following is needed for 2.5 kernels and also let's the makefile work
+# when things get screwed.§
+ifneq (,$(wildcard $(KERNEL_LOCATION)/Rules.make))
+include $(KERNEL_LOCATION)/Rules.make
+endif
